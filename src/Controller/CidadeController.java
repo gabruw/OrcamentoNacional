@@ -1,6 +1,6 @@
 package Controller;
 
-public class MunicipioController {
+public class CidadeController {
     public void Include(){
         
     }

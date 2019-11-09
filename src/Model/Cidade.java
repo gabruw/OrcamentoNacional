@@ -1,16 +1,16 @@
 package Model;
 
-public class Municipio {
+public class Cidade {
     public String Nome;
     public int Populacao;
     public EClima Clima;
     public float Gastos;
 
-    public Municipio() {
+    public Cidade() {
         
     }
 
-    public Municipio(String Nome, int Populacao, EClima Clima, float Gastos) {
+    public Cidade(String Nome, int Populacao, EClima Clima, float Gastos) {
         this.Nome = Nome;
         this.Populacao = Populacao;
         this.Clima = Clima;
