@@ -1,10 +1,10 @@
 package Model;
 
 public class Cidade {
-    public String Nome;
-    public int Populacao;
-    public EClima Clima;
-    public float Gastos;
+    private String Nome;
+    private int Populacao;
+    private EClima Clima;
+    private float Gastos;
 
     public Cidade() {
         

@@ -1,11 +1,11 @@
 package Model;
 
 public class Estado {
-    public String Nome;
-    public String Sigla;
-    public byte DistritoFederal;
-    public float OrcamentoTotal;
-    public float GastosTotais;
+    private String Nome;
+    private String Sigla;
+    private byte DistritoFederal;
+    private float OrcamentoTotal;
+    private float GastosTotais;
 
     public Estado() {
         
