@@ -44,7 +44,6 @@ public class Principal extends javax.swing.JFrame {
         jMenuCadastro.setText("Cadastro");
 
         jCheckBoxMenuItemCidade.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
-        jCheckBoxMenuItemCidade.setSelected(true);
         jCheckBoxMenuItemCidade.setText("Cidade");
         jMenuCadastro.add(jCheckBoxMenuItemCidade);
 
@@ -59,7 +58,6 @@ public class Principal extends javax.swing.JFrame {
         jMenuCadastro.add(jSeparatorCadastro);
 
         jCheckBoxMenuItemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jCheckBoxMenuItemSair.setSelected(true);
         jCheckBoxMenuItemSair.setText("Sair");
         jMenuCadastro.add(jCheckBoxMenuItemSair);
 
