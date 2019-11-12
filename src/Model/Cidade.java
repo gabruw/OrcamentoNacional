@@ -1,6 +1,7 @@
 package Model;
 
 public class Cidade {
+    private long Id;
     private String Nome;
     private int Populacao;
     private EClima Clima;
@@ -10,11 +11,35 @@ public class Cidade {
         
     }
 
-    public Cidade(String Nome, int Populacao, EClima Clima, float Gastos) {
+    public Cidade(long Id, String Nome, int Populacao, EClima Clima, float Gastos) {
+        this.Id = Id;
         this.Nome = Nome;
         this.Populacao = Populacao;
         this.Clima = Clima;
         this.Gastos = Gastos;
+    }
+    
+    public static EClima EClimaOperator(String clima){
+        switch(clima){
+            case "Equatorial":
+                return Model.EClima.EQUATORIAL;
+            case "Tropical":
+                return Model.EClima.TROPICAL;
+            case "Subtropical":
+                return Model.EClima.SUBTROPICAL;
+            case "Semiárido":
+                return Model.EClima.SEMIÁRIDO;
+            default:
+                return Model.EClima.EQUATORIAL;
+        }
+    }
+    
+    public long getId() {
+        return Id;
+    }
+
+    public void setId(long Id) {
+        this.Id = Id;
     }
 
     public String getNome() {

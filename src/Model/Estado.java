@@ -1,6 +1,7 @@
 package Model;
 
 public class Estado {
+    private long Id;
     private String Nome;
     private String Sigla;
     private byte DistritoFederal;
@@ -11,12 +12,21 @@ public class Estado {
         
     }
 
-    public Estado(String Nome, String Sigla, byte DistritoFederal, float OrcamentoTotal, float GastosTotais) {
+    public Estado(long Id, String Nome, String Sigla, byte DistritoFederal, float OrcamentoTotal, float GastosTotais) {
+        this.Id = Id;
         this.Nome = Nome;
         this.Sigla = Sigla;
         this.DistritoFederal = DistritoFederal;
         this.OrcamentoTotal = OrcamentoTotal;
         this.GastosTotais = GastosTotais;
+    }
+
+    public long getId() {
+        return Id;
+    }
+
+    public void setId(long Id) {
+        this.Id = Id;
     }
 
     public String getNome() {

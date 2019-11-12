@@ -134,24 +134,8 @@ public class CadastroCidade extends javax.swing.JFrame {
         cidade.setPopulacao(Integer.parseInt(jTextFieldGastos.getText()));
         cidade.setGastos(Float.parseFloat(jTextFieldNome.getText()));
         
-        String clima = jComboBoxClima.getSelectedItem().toString();
-        switch(clima){
-            case "Equatorial":
-                cidade.setClima(Model.EClima.EQUATORIAL);
-                break;
-            case "Tropical":
-                cidade.setClima(Model.EClima.TROPICAL);
-                break;
-            case "Subtropical":
-                cidade.setClima(Model.EClima.SUBTROPICAL);
-                break;
-            case "Semiárido":
-                cidade.setClima(Model.EClima.SEMIÁRIDO);
-                break;
-            default:
-                cidade.setClima(Model.EClima.EQUATORIAL);
-                break;
-        }
+        String clima = jComboBoxClima.getSelectedItem().toString();    
+        cidade.setClima(Model.Cidade.EClimaOperator(clima));
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     /**
