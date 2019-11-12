@@ -19,21 +19,6 @@ public class Cidade {
         this.Gastos = Gastos;
     }
     
-    public static EClima EClimaOperator(String clima){
-        switch(clima){
-            case "Equatorial":
-                return Model.EClima.EQUATORIAL;
-            case "Tropical":
-                return Model.EClima.TROPICAL;
-            case "Subtropical":
-                return Model.EClima.SUBTROPICAL;
-            case "Semiárido":
-                return Model.EClima.SEMIÁRIDO;
-            default:
-                return Model.EClima.EQUATORIAL;
-        }
-    }
-    
     public long getId() {
         return Id;
     }

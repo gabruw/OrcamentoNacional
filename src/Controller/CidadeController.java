@@ -39,7 +39,7 @@ public class CidadeController {
     }
     
     public List<Cidade> GetAll(){
-        List<Cidade> listAluno = new ArrayList<>();
+        List<Cidade> listCidade = new ArrayList<>();
         
         try{
             String query = "SELECT * FROM cidade";
@@ -50,17 +50,17 @@ public class CidadeController {
             while(result.next()){
                 Cidade cidade = new Cidade();
                 cidade.setId((long) result.getLong("id"));
-                cidade.setNome(result.getString("nome"));
-                cidade.setClima((EClima) Model.Cidade.EClimaOperator(result.getString("clima")));
+                cidade.setNome((String) result.getString("nome"));
+                cidade.setClima((EClima) EClima.getClima(result.getInt("clima")));
                 cidade.setGastos((float) result.getFloat("gastos"));
                 cidade.setPopulacao((int) result.getInt("populacao"));
                 
-                listAluno.add(cidade);
+                listCidade.add(cidade);
             }
         } catch(SQLException SqlEx){
             throw new RuntimeException(SqlEx);
         }
         
-        return listAluno;
+        return listCidade;
     }
 }
