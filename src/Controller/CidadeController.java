@@ -12,55 +12,72 @@ import java.util.List;
 
 public class CidadeController {
     private Connection connect = null;
-    
+
     public CidadeController() {
-	this.connect = new ConnectionFactory().SQLConnect();
+        this.connect = new ConnectionFactory().SQLConnect();
     }
-    
-    public void Include(Cidade object){
-        try{
+
+    public void Include(Cidade object) {
+        try {
+            if (this.isCidadeEqualEstado(object.getNome())) {
+                return;
+            }
+
             String query = "INSERT INTO cidade(nome, clima, gastos, populacao) VALUES (?, ?, ?, ?)";
-            
+
             try (PreparedStatement stmt = connect.prepareStatement(query)) {
                 stmt.setString(1, object.getNome());
                 stmt.setString(2, object.getClima().toString());
                 stmt.setFloat(3, object.getGastos());
                 stmt.setInt(4, object.getPopulacao());
-                
+
                 stmt.execute();
             }
-        }catch(SQLException SqlEx){
+
+        } catch (SQLException SqlEx) {
             throw new RuntimeException(SqlEx);
         }
     }
-    
-    public boolean isCidadeEqualEstado(){
-        return false;
+
+    public boolean isCidadeEqualEstado(String nomeCidade) {
+        try {
+            String query = "SELECT E.nome FROM estado E WHERE E.nome = ?";
+
+            try (PreparedStatement stmt = connect.prepareStatement(query)) {
+                stmt.setString(1, nomeCidade);
+
+                stmt.execute();
+            }
+        } catch (SQLException SqlEx) {
+            return false;
+        }
+
+        return true;
     }
-    
-    public List<Cidade> GetAll(){
+
+    public List<Cidade> GetAll() {
         List<Cidade> listCidade = new ArrayList<>();
-        
-        try{
+
+        try {
             String query = "SELECT * FROM cidade";
-            
+
             PreparedStatement stmt = connect.prepareStatement(query);
             ResultSet result = stmt.executeQuery(query);
-            
-            while(result.next()){
+
+            while (result.next()) {
                 Cidade cidade = new Cidade();
                 cidade.setId((long) result.getLong("id"));
                 cidade.setNome((String) result.getString("nome"));
                 cidade.setClima((EClima) EClima.getClima(result.getInt("clima")));
                 cidade.setGastos((float) result.getFloat("gastos"));
                 cidade.setPopulacao((int) result.getInt("populacao"));
-                
+
                 listCidade.add(cidade);
             }
-        } catch(SQLException SqlEx){
+        } catch (SQLException SqlEx) {
             throw new RuntimeException(SqlEx);
         }
-        
+
         return listCidade;
     }
 }
