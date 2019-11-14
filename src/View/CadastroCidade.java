@@ -103,8 +103,8 @@ public class CadastroCidade extends javax.swing.JFrame {
                     .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextFieldPopulacao)
                         .addComponent(jTextFieldGastos)
-                        .addComponent(jComboBoxClima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(52, 52, 52)))
+                        .addComponent(jComboBoxClima, javax.swing.GroupLayout.PREFERRED_SIZE, 36, Short.MAX_VALUE))
+                    .addGap(55, 55, 55)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

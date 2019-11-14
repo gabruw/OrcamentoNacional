@@ -115,9 +115,9 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jTextFieldPopulacao" alignment="3" max="32767" attributes="0"/>
                           <Component id="jTextFieldGastos" alignment="3" max="32767" attributes="0"/>
-                          <Component id="jComboBoxClima" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBoxClima" pref="36" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
