@@ -4,9 +4,23 @@ import java.awt.Color;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 
 public class Principal extends javax.swing.JFrame {
+    Cidade jPanelCidade = new Cidade();
+    Estado jPanelEstado = new Estado();
+     
     public Principal() {
         this.setExtendedState(MAXIMIZED_BOTH);
-        this.getContentPane().setBackground(Color.BLACK);
+        this.getContentPane().setBackground(Color.DARK_GRAY);
+        
+        // JPanel Cidade
+        jPanelCidade.setSize(100, 100);
+        jPanelCidade.setVisible(false);
+        this.add(jPanelCidade);
+        
+        // JPanel Estado
+        jPanelEstado.setSize(100, 100);
+        jPanelEstado.setVisible(false);
+        this.add(jPanelEstado);
+        
         initComponents();
     }
 
@@ -14,44 +28,51 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
         jMenuBarSupeiror = new javax.swing.JMenuBar();
         jMenuCadastro = new javax.swing.JMenu();
-        jCheckBoxMenuItemCidade = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItemEstado = new javax.swing.JCheckBoxMenuItem();
+        jRadioButtonMenuItemCidade = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItemEstado = new javax.swing.JRadioButtonMenuItem();
         jSeparatorCadastro = new javax.swing.JPopupMenu.Separator();
-        jCheckBoxMenuItemSair = new javax.swing.JCheckBoxMenuItem();
+        jRadioButtonMenuItemSair = new javax.swing.JRadioButtonMenuItem();
+
+        jRadioButtonMenuItem2.setSelected(true);
+        jRadioButtonMenuItem2.setText("jRadioButtonMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenuCadastro.setText("Cadastro");
 
-        jCheckBoxMenuItemCidade.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
-        jCheckBoxMenuItemCidade.setText("Cidade");
-        jCheckBoxMenuItemCidade.addActionListener(new java.awt.event.ActionListener() {
+        jRadioButtonMenuItemCidade.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
+        jRadioButtonMenuItemCidade.setSelected(true);
+        jRadioButtonMenuItemCidade.setText("Cidade");
+        jRadioButtonMenuItemCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItemCidadeActionPerformed(evt);
+                jRadioButtonMenuItemCidadeActionPerformed(evt);
             }
         });
-        jMenuCadastro.add(jCheckBoxMenuItemCidade);
+        jMenuCadastro.add(jRadioButtonMenuItemCidade);
 
-        jCheckBoxMenuItemEstado.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK));
-        jCheckBoxMenuItemEstado.setText("Estado");
-        jCheckBoxMenuItemEstado.addActionListener(new java.awt.event.ActionListener() {
+        jRadioButtonMenuItemEstado.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK));
+        jRadioButtonMenuItemEstado.setSelected(true);
+        jRadioButtonMenuItemEstado.setText("Estado");
+        jRadioButtonMenuItemEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItemEstadoActionPerformed(evt);
+                jRadioButtonMenuItemEstadoActionPerformed(evt);
             }
         });
-        jMenuCadastro.add(jCheckBoxMenuItemEstado);
+        jMenuCadastro.add(jRadioButtonMenuItemEstado);
         jMenuCadastro.add(jSeparatorCadastro);
 
-        jCheckBoxMenuItemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jCheckBoxMenuItemSair.setText("Sair");
-        jCheckBoxMenuItemSair.addActionListener(new java.awt.event.ActionListener() {
+        jRadioButtonMenuItemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
+        jRadioButtonMenuItemSair.setSelected(true);
+        jRadioButtonMenuItemSair.setText("Sair");
+        jRadioButtonMenuItemSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItemSairActionPerformed(evt);
+                jRadioButtonMenuItemSairActionPerformed(evt);
             }
         });
-        jMenuCadastro.add(jCheckBoxMenuItemSair);
+        jMenuCadastro.add(jRadioButtonMenuItemSair);
 
         jMenuBarSupeiror.add(jMenuCadastro);
 
@@ -71,17 +92,17 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBoxMenuItemEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemEstadoActionPerformed
-        
-    }//GEN-LAST:event_jCheckBoxMenuItemEstadoActionPerformed
+    private void jRadioButtonMenuItemCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemCidadeActionPerformed
+        jPanelCidade.setVisible(true);
+    }//GEN-LAST:event_jRadioButtonMenuItemCidadeActionPerformed
 
-    private void jCheckBoxMenuItemCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemCidadeActionPerformed
-        
-    }//GEN-LAST:event_jCheckBoxMenuItemCidadeActionPerformed
+    private void jRadioButtonMenuItemEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemEstadoActionPerformed
+        jPanelEstado.setVisible(true);
+    }//GEN-LAST:event_jRadioButtonMenuItemEstadoActionPerformed
 
-    private void jCheckBoxMenuItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItemSairActionPerformed
+    private void jRadioButtonMenuItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemSairActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jCheckBoxMenuItemSairActionPerformed
+    }//GEN-LAST:event_jRadioButtonMenuItemSairActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -116,11 +137,12 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemCidade;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemEstado;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemSair;
     private javax.swing.JMenuBar jMenuBarSupeiror;
     private javax.swing.JMenu jMenuCadastro;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemCidade;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemEstado;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItemSair;
     private javax.swing.JPopupMenu.Separator jSeparatorCadastro;
     // End of variables declaration//GEN-END:variables
 }
