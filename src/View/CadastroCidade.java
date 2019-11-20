@@ -37,7 +37,7 @@ public class CadastroCidade extends javax.swing.JFrame {
             }
         });
 
-        jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de CIdades"));
+        jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Cidades"));
 
         jTextFieldNome.setBorder(javax.swing.BorderFactory.createTitledBorder("Nome"));
         jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {

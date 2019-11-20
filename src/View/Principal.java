@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 
 public class Principal extends javax.swing.JFrame {
@@ -8,18 +9,19 @@ public class Principal extends javax.swing.JFrame {
     Estado jPanelEstado = new Estado();
      
     public Principal() {
-        this.setExtendedState(MAXIMIZED_BOTH);
+        this.setExtendedState(this.MAXIMIZED_BOTH);
         this.getContentPane().setBackground(Color.DARK_GRAY);
         
+        Dimension size = this.getSize();
         // JPanel Cidade
-        jPanelCidade.setSize(100, 100);
-        jPanelCidade.setVisible(false);
+        jPanelCidade.setSize(110,110);
         this.add(jPanelCidade);
+        jPanelCidade.setVisible(false);
         
         // JPanel Estado
-        jPanelEstado.setSize(100, 100);
-        jPanelEstado.setVisible(false);
+        jPanelEstado.setSize(110,110);
         this.add(jPanelEstado);
+        jPanelEstado.setVisible(false);
         
         initComponents();
     }
@@ -88,16 +90,16 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 278, Short.MAX_VALUE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRadioButtonMenuItemCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemCidadeActionPerformed
+        jPanelEstado.setVisible(false);
         jPanelCidade.setVisible(true);
     }//GEN-LAST:event_jRadioButtonMenuItemCidadeActionPerformed
 
     private void jRadioButtonMenuItemEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemEstadoActionPerformed
-        jPanelEstado.setVisible(true);
+        jPanelCidade.setVisible(false);
+        jPanelEstado.setVisible(true);   
     }//GEN-LAST:event_jRadioButtonMenuItemEstadoActionPerformed
 
     private void jRadioButtonMenuItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItemSairActionPerformed
