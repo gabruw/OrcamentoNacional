@@ -17,10 +17,10 @@ public class CidadeController {
         this.connect = new ConnectionFactory().SQLConnect();
     }
 
-    public void Include(Cidade object) {
+    public boolean Include(Cidade object) {
         try {
-            if (this.isCidadeEqualEstado(object.getNome())) {
-                return;
+            if (this.isCidadeEqualOtherCidade(object.getNome())) {
+                return false;
             }
 
             String query = "INSERT INTO cidade(nome, clima, gastos, populacao) VALUES (?, ?, ?, ?)";
@@ -37,11 +37,13 @@ public class CidadeController {
         } catch (SQLException SqlEx) {
             throw new RuntimeException(SqlEx);
         }
+        
+        return true;
     }
 
-    public boolean isCidadeEqualEstado(String nomeCidade) {
+    public boolean isCidadeEqualOtherCidade(String nomeCidade) {
         try {
-            String query = "SELECT E.nome FROM estado E WHERE E.nome = ?";
+            String query = "SELECT E.nome FROM cidade E WHERE E.nome = ?";
 
             try (PreparedStatement stmt = connect.prepareStatement(query)) {
                 stmt.setString(1, nomeCidade);
