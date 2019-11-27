@@ -17,10 +17,10 @@ public class CidadeController {
         this.connect = new ConnectionFactory().SQLConnect();
     }
 
-    public boolean Include(Cidade object) {
+    public void Include(Cidade object) {
         try {
-            if (this.isCidadeEqualOtherCidade(object.getNome())) {
-                return false;
+            if (this.haveCidade(object)) {
+                return;
             }
 
             String query = "INSERT INTO cidade(nome, clima, gastos, populacao) VALUES (?, ?, ?, ?)";
@@ -33,28 +33,41 @@ public class CidadeController {
 
                 stmt.execute();
             }
+        } catch (SQLException SqlEx) {
+            throw new RuntimeException(SqlEx);
+        }
+    }
 
+    public boolean haveCidade(Cidade object) {
+        try {
+            String query = "SELECT * FROM cidade C WHERE C.nome = ?";
+            
+            PreparedStatement stmt = connect.prepareStatement(query);
+            stmt.setString(1, object.getNome());
+            ResultSet result = stmt.executeQuery(query);
+
+            Cidade cidade = new Cidade();
+            cidade.setId((long) result.getLong("id"));
+            cidade.setNome((String) result.getString("nome"));
+            cidade.setClima((EClima) EClima.getClima(result.getInt("clima")));
+            cidade.setGastos((float) result.getFloat("gastos"));
+            cidade.setPopulacao((int) result.getInt("populacao"));
+            
+            if(cidade.getNome() != null){
+                query = "UPDATE cidade C SET C.gastos = ? WHERE C.id = ?";
+                
+                stmt.setFloat(1, (cidade.getGastos() + object.getGastos()));
+                stmt.setLong(2, cidade.getId());
+                
+                stmt.execute(query);         
+            }else{
+               return true;
+            }
         } catch (SQLException SqlEx) {
             throw new RuntimeException(SqlEx);
         }
         
-        return true;
-    }
-
-    public boolean isCidadeEqualOtherCidade(String nomeCidade) {
-        try {
-            String query = "SELECT E.nome FROM cidade E WHERE E.nome = ?";
-
-            try (PreparedStatement stmt = connect.prepareStatement(query)) {
-                stmt.setString(1, nomeCidade);
-
-                stmt.execute();
-            }
-        } catch (SQLException SqlEx) {
-            return false;
-        }
-
-        return true;
+        return false;
     }
 
     public List<Cidade> GetAll() {
