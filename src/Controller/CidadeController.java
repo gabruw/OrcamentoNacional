@@ -37,6 +37,38 @@ public class CidadeController {
             throw new RuntimeException(SqlEx);
         }
     }
+    
+    public void Update(Cidade object) {
+        try {
+            String query = "UPDATE cidade C SET nome = ?, clima = ?, gastos = ?, populacao = ? WHERE id = ?";
+
+            try (PreparedStatement stmt = connect.prepareStatement(query)) {
+                stmt.setString(1, object.getNome());
+                stmt.setString(2, object.getClima().toString());
+                stmt.setFloat(3, object.getGastos());
+                stmt.setInt(4, object.getPopulacao());
+                stmt.setLong(5, object.getId());
+
+                stmt.execute();
+            }
+        } catch (SQLException SqlEx) {
+            throw new RuntimeException(SqlEx);
+        }
+    }
+    
+    public void Delete(Cidade object) {
+        try {
+            String query = "DELETE FROM cidade WHERE id = ?";
+
+            try (PreparedStatement stmt = connect.prepareStatement(query)) {
+                stmt.setLong(1, object.getId());
+
+                stmt.execute();
+            }
+        } catch (SQLException SqlEx) {
+            throw new RuntimeException(SqlEx);
+        }
+    }
 
     public boolean haveCidade(Cidade object) {
         try {
@@ -68,6 +100,49 @@ public class CidadeController {
         }
         
         return false;
+    }
+    
+    public void addGastoToCidade(Cidade object) {
+        try {
+            String query = "UPDATE cidade C SET C.gastos = ? WHERE C.id = ?";
+
+            try (PreparedStatement stmt = connect.prepareStatement(query)) {
+                stmt.setFloat(1, object.getGastos());
+                stmt.setLong(2, object.getId());
+
+                stmt.execute();
+            }
+        } catch (SQLException SqlEx) {
+            throw new RuntimeException(SqlEx);
+        }
+    }
+    
+    public List<Cidade> GetAllCidadeWithClima(int object) {       
+        List<Cidade> listCidade = new ArrayList<>();
+
+        try {
+            String query = "SELECT * FROM cidade C WHERE C.clima = ?";
+
+            PreparedStatement stmt = connect.prepareStatement(query);
+            stmt.setInt(1, object);
+            
+            ResultSet result = stmt.executeQuery(query);
+
+            while (result.next()) {
+                Cidade cidade = new Cidade();
+                cidade.setId((long) result.getLong("id"));
+                cidade.setNome((String) result.getString("nome"));
+                cidade.setClima((EClima) EClima.getClima(result.getInt("clima")));
+                cidade.setGastos((float) result.getFloat("gastos"));
+                cidade.setPopulacao((int) result.getInt("populacao"));
+
+                listCidade.add(cidade);
+            }
+        } catch (SQLException SqlEx) {
+            throw new RuntimeException(SqlEx);
+        }
+
+        return listCidade;
     }
 
     public List<Cidade> GetAll() {

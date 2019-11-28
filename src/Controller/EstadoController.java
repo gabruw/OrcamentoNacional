@@ -35,8 +35,64 @@ public class EstadoController {
         }
     }
     
-    public boolean isGastoMaior(){
-        return true;
+    public void Update(Estado object) {
+        try {
+            String query = "UPDATE estado C SET nome = ?, sigla = ?, distritofederal = ?, orcamentototal = ?, gastostotais = ? WHERE id = ?";
+
+            try (PreparedStatement stmt = connect.prepareStatement(query)) {
+                stmt.setString(1, object.getNome());
+                stmt.setString(2, object.getSigla());
+                stmt.setByte(3, object.getDistritoFederal());
+                stmt.setFloat(4, object.getOrcamentoTotal());
+                stmt.setFloat(5, object.getGastosTotais());
+                stmt.setLong(6, object.getId());
+                
+                stmt.execute();
+            }
+        } catch (SQLException SqlEx) {
+            throw new RuntimeException(SqlEx);
+        }
+    }
+    
+    public void Delete(Estado object) {
+        try {
+            String query = "DELETE FROM estado WHERE id = ?";
+
+            try (PreparedStatement stmt = connect.prepareStatement(query)) {
+                stmt.setLong(1, object.getId());
+
+                stmt.execute();
+            }
+        } catch (SQLException SqlEx) {
+            throw new RuntimeException(SqlEx);
+        }
+    }
+    
+    public List<Estado> GetAllGastoMaior(){
+        List<Estado> listEstado = new ArrayList<>();
+
+        try {
+            String query = "SELECT * FROM estado E WHERE E.gastostotais < 0";
+
+            PreparedStatement stmt = connect.prepareStatement(query);
+            ResultSet result = stmt.executeQuery(query);
+
+            while (result.next()) {
+                Estado estado = new Estado();
+                estado.setId((long) result.getLong("id"));
+                estado.setNome((String) result.getString("nome"));
+                estado.setSigla((String) result.getString("sigla"));
+                estado.setDistritoFederal((byte) result.getByte("distritofederal"));
+                estado.setOrcamentoTotal((float) result.getFloat("orcamentototal"));
+                estado.setGastosTotais((float) result.getFloat("gastostotais"));
+
+                listEstado.add(estado);
+            }
+        } catch (SQLException SqlEx) {
+            throw new RuntimeException(SqlEx);
+        }
+
+        return listEstado;
     }
     
     public List<Estado> GetAll() {
