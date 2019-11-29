@@ -1,111 +1,92 @@
 package View;
 
-import Model.Cidade;
-import Model.EClima;
 import Controller.CidadeController;
+import Controller.EstadoController;
+import Main.HibernateUtil;
+import Model.Cidade;
+import Model.Estado;
+import java.awt.HeadlessException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 public class CadastroCidade extends javax.swing.JFrame {
+    SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    Session session = sessionFactory.getCurrentSession();
+    Transaction lx = session.beginTransaction();
+
     public CadastroCidade() {
         initComponents();
+        
+        //Carregar combo com os estados
+        EstadoController daoEstado = new EstadoController();
+        for (Estado estado : daoEstado.GetAll()) {
+            cbUF.addItem(estado);
+        }
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButtonConfirmar = new javax.swing.JButton();
-        jButtonCancelar = new javax.swing.JButton();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
-        jTextFieldNome = new javax.swing.JTextField();
-        jTextFieldPopulacao = new javax.swing.JTextField();
-        jComboBoxClima = new javax.swing.JComboBox<>();
-        jTextFieldGastos = new javax.swing.JTextField();
+        tfNome = new javax.swing.JTextField();
+        tfPopulacao = new javax.swing.JTextField();
+        btCadastrar = new javax.swing.JButton();
+        lbTitulo = new javax.swing.JLabel();
+        cbUF = new javax.swing.JComboBox<>();
+        cbClima = new javax.swing.JComboBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButtonConfirmar.setText("Confirmar");
-        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+        tfNome.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tfNome.setForeground(new java.awt.Color(0, 0, 102));
+        tfNome.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12), new java.awt.Color(0, 0, 102))); // NOI18N
+        tfNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConfirmarActionPerformed(evt);
+                tfNomeActionPerformed(evt);
             }
         });
 
-        jButtonCancelar.setText("Cancelar");
-        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+        tfPopulacao.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tfPopulacao.setForeground(new java.awt.Color(0, 0, 102));
+        tfPopulacao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "População", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12), new java.awt.Color(0, 0, 102))); // NOI18N
+        tfPopulacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelarActionPerformed(evt);
+                tfPopulacaoActionPerformed(evt);
             }
         });
 
-        jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Cidades"));
-
-        jTextFieldNome.setBorder(javax.swing.BorderFactory.createTitledBorder("Nome"));
-        jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
+        btCadastrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btCadastrar.setForeground(new java.awt.Color(0, 0, 102));
+        btCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/adicionar.png"))); // NOI18N
+        btCadastrar.setText("CADASTRAR");
+        btCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNomeActionPerformed(evt);
+                btCadastrarActionPerformed(evt);
             }
         });
 
-        jTextFieldPopulacao.setBorder(javax.swing.BorderFactory.createTitledBorder("População"));
-        jTextFieldPopulacao.addActionListener(new java.awt.event.ActionListener() {
+        lbTitulo.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        lbTitulo.setForeground(new java.awt.Color(0, 0, 102));
+        lbTitulo.setText("ORÇAMENTO NACIONAL - CADASTRO DE CIDADES");
+        lbTitulo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(204, 0, 0)));
+        lbTitulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        cbUF.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cbUF.setForeground(new java.awt.Color(255, 255, 255));
+        cbUF.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecione a UF:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12), new java.awt.Color(0, 0, 102))); // NOI18N
+        cbUF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldPopulacaoActionPerformed(evt);
+                cbUFActionPerformed(evt);
             }
         });
 
-        jComboBoxClima.setEditable(true);
-        jComboBoxClima.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Equatorial", "Tropical", "Subtropical", "Semiárido" }));
-        jComboBoxClima.setBorder(javax.swing.BorderFactory.createTitledBorder("Clima"));
-        jComboBoxClima.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxClimaActionPerformed(evt);
-            }
-        });
-
-        jTextFieldGastos.setBorder(javax.swing.BorderFactory.createTitledBorder("Gasto"));
-        jTextFieldGastos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldGastosActionPerformed(evt);
-            }
-        });
-
-        jLayeredPane1.setLayer(jTextFieldNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jTextFieldPopulacao, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jComboBoxClima, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jTextFieldGastos, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                            .addComponent(jTextFieldPopulacao, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jComboBoxClima, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextFieldGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextFieldPopulacao)
-                        .addComponent(jTextFieldGastos)
-                        .addComponent(jComboBoxClima, javax.swing.GroupLayout.PREFERRED_SIZE, 36, Short.MAX_VALUE))
-                    .addGap(55, 55, 55)))
-        );
+        cbClima.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cbClima.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Equatorial", "Tropical", "Semiárido", "Subtropical" }));
+        cbClima.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipo de Clima:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12), new java.awt.Color(0, 0, 102))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,58 +95,87 @@ public class CadastroCidade extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonConfirmar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(tfPopulacao, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(cbClima, 0, 119, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(cbUF, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lbTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbTitulo)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbUF, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfPopulacao, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbClima, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCancelar)
-                    .addComponent(jButtonConfirmar))
+                .addComponent(btCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldGastosActionPerformed
+    private void tfNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldGastosActionPerformed
+    }//GEN-LAST:event_tfNomeActionPerformed
 
-    private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
+    private void tfPopulacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPopulacaoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNomeActionPerformed
+    }//GEN-LAST:event_tfPopulacaoActionPerformed
 
-    private void jTextFieldPopulacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPopulacaoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldPopulacaoActionPerformed
+    private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
+        try {
+            Cidade cidade = new Cidade();
+            
+            CidadeController cidadeDAO = new CidadeController();
+            EstadoController estadoDAO = new EstadoController();
+            
+            cidade.setNome(tfNome.getText());
+            Estado estado = estadoDAO.GetAll().get(cbUF.getSelectedIndex());
+            cidade.setIdEstado(estado.getId());
+            
+            for(Cidade cdd : cidadeDAO.GetAllCidadesFromEstado(cidade)){
+                if(cdd.getNome().equals(cidade.getNome())){
+                    JOptionPane.showMessageDialog(null, "Já existe uma cidade com este nome");
+                    return;
+                };
+            }
+            
+            cidade.setClima(cbClima.getSelectedItem().toString());
+            cidade.setPopulacao(Integer.parseInt(tfPopulacao.getText()));            
 
-    private void jComboBoxClimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxClimaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxClimaActionPerformed
+            cidadeDAO.Include(cidade);
+            
+            int status = JOptionPane.showConfirmDialog(null, "Dados da cidade salvos com sucesso! Deseja adicionar gastos para esta cidade?\n", "Confirmação", JOptionPane.YES_NO_OPTION);
+            if (status == JOptionPane.YES_OPTION) {
+                new AdicionarGasto().setVisible(true);
+            } else if (status == JOptionPane.NO_OPTION) {
+                this.dispose();
+            }            
+        } catch (NumberFormatException | HeadlessException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao salvar os dados da cidade!\n" + ex);
+        }
 
-    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButtonCancelarActionPerformed
+    }//GEN-LAST:event_btCadastrarActionPerformed
 
-    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        Cidade cidade = new Cidade();
-        cidade.setNome(jTextFieldNome.getText());
-        cidade.setClima(EClima.getClima(jComboBoxClima.getSelectedIndex()));
-        cidade.setPopulacao(Integer.parseInt(jTextFieldGastos.getText()));
-        cidade.setGastos(Float.parseFloat(jTextFieldNome.getText()));
-    }//GEN-LAST:event_jButtonConfirmarActionPerformed
+    private void cbUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUFActionPerformed
+
+    }//GEN-LAST:event_cbUFActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,13 +212,13 @@ public class CadastroCidade extends javax.swing.JFrame {
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JButton jButtonConfirmar;
-    private javax.swing.JComboBox<String> jComboBoxClima;
-    private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JTextField jTextFieldGastos;
-    private javax.swing.JTextField jTextFieldNome;
-    private javax.swing.JTextField jTextFieldPopulacao;
+    private javax.swing.JButton btCadastrar;
+    private javax.swing.JComboBox cbClima;
+    private javax.swing.JComboBox<Object> cbUF;
+    private javax.swing.JLabel lbTitulo;
+    private javax.swing.JTextField tfNome;
+    private javax.swing.JTextField tfPopulacao;
     // End of variables declaration//GEN-END:variables
 }
